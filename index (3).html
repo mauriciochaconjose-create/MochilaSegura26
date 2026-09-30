@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MochilaSegura | Gestión de Riesgos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#inicio">🎒 MochilaSegura</a>
+
+    <div class="nav-links">
+      <a href="#mochila">Mochila</a>
+      <a href="#plan">Plan familiar</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#juego">Juego</a>
+      <a href="#aprende">Aprende</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<section id="inicio" class="hero">
+  <div>
+    <span class="badge">PREVENCIÓN • APRENDIZAJE • DIVERSIÓN</span>
+
+    <h1>MochilaSegura</h1>
+
+    <p>
+      Genera tu mochila de emergencia, crea un plan familiar y aprende jugando
+      cómo actuar ante diferentes situaciones de riesgo.
+    </p>
+
+    <a class="btn" href="#mochila">Comenzar</a>
+  </div>
+
+  <div class="hero-card">
+    <div class="big-emoji">🎒</div>
+    <h3>Prepárate antes de una emergencia</h3>
+    <p>Pequeñas decisiones pueden ayudar a estar mejor preparados.</p>
+  </div>
+</section>
+
+<section class="stats">
+
+  <div>
+    <strong id="statPuntos">0</strong>
+    <span>⭐ Puntos</span>
+  </div>
+
+  <div>
+    <strong id="statNiveles">0/10</strong>
+    <span>🎮 Niveles</span>
+  </div>
+
+  <div>
+    <strong id="statMedallas">0</strong>
+    <span>🏅 Medallas</span>
+  </div>
+
+  <div>
+    <strong id="statPreparacion">0%</strong>
+    <span>📊 Progreso</span>
+  </div>
+
+</section>
+
+<section class="section reset-section">
+  <div class="card reset-card">
+
+    <div>
+      <h3>⚙️ Control de progreso</h3>
+      <p>
+        Tu progreso se guarda automáticamente. Solo se borrará si utilizas
+        el botón de reinicio.
+      </p>
+    </div>
+
+    <button class="btn reset-btn" onclick="reiniciarProgresoCompleto()">
+      🔄 Reiniciar progreso
+    </button>
+
+  </div>
+</section>
+
+<section id="mochila" class="section">
+
+  <div class="section-title">
+    <span>🎒</span>
+
+    <div>
+      <h2>Generador de mochila de emergencia</h2>
+      <p>Personaliza la lista según las personas, días y riesgo.</p>
+    </div>
+  </div>
+
+  <div class="card form-grid">
+
+    <label>
+      Número de personas
+      <input id="personas" type="number" min="1" value="1">
+    </label>
+
+    <label>
+      Número de días
+      <input id="dias" type="number" min="1" value="3">
+    </label>
+
+    <label>
+      Niños
+      <input id="ninos" type="number" min="0" value="0">
+    </label>
+
+    <label>
+      Adultos mayores
+      <input id="adultos" type="number" min="0" value="0">
+    </label>
+
+    <label>
+      Personas con discapacidad
+      <input id="discapacidad" type="number" min="0" value="0">
+    </label>
+
+    <label>
+      Mascotas
+      <input id="mascotas" type="number" min="0" value="0">
+    </label>
+
+    <label>
+      Tipo de emergencia
+
+      <select id="riesgo">
+        <option value="general">Emergencia general</option>
+        <option value="terremoto">Terremoto</option>
+        <option value="incendio">Incendio</option>
+        <option value="inundacion">Inundación</option>
+        <option value="huaico">Huaico</option>
+        <option value="lluvias">Lluvias intensas</option>
+      </select>
+    </label>
+
+    <button class="btn full" onclick="generarMochila()">
+      🎒 Generar mochila
+    </button>
+
+  </div>
+
+  <div id="resultadoMochila" class="result"></div>
+
+  <div class="card checklist-card">
+
+    <div class="section-title small">
+      <span>✅</span>
+
+      <div>
+        <h3>Checklist de preparación</h3>
+        <p>Marca lo que ya tienes.</p>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div id="barraProgreso"></div>
+    </div>
+
+    <div class="progress-info">
+      <span id="textoProgreso">0% preparado</span>
+      <span id="contadorChecklist">0/0</span>
+    </div>
+
+    <div id="checklist"></div>
+
+    <button class="btn secondary" onclick="imprimirMochila()">
+      🖨️ Imprimir mochila
+    </button>
+
+  </div>
+
+</section>
+
+<section id="plan" class="section alt">
+
+  <div class="section-title">
+    <span>👨‍👩‍👧‍👦</span>
+
+    <div>
+      <h2>Crear plan familiar de emergencia</h2>
+      <p>Organiza información importante para actuar en familia.</p>
+    </div>
+  </div>
+
+  <div class="card form-grid">
+
+    <label>
+      Integrantes de la familia
+      <input id="familia" type="text"
+             placeholder="Ej.: José, mamá, papá y hermano">
+    </label>
+
+    <label>
+      Responsable
+      <input id="responsable" type="text"
+             placeholder="Nombre del responsable">
+    </label>
+
+    <label>
+      Contacto de emergencia
+      <input id="contacto" type="text"
+             placeholder="Nombre del contacto">
+    </label>
+
+    <label>
+      Teléfono
+      <input id="telefono" type="tel"
+             placeholder="Número de teléfono">
+    </label>
+
+    <label>
+      Punto de encuentro
+      <input id="puntoEncuentro" type="text"
+             placeholder="Ej.: parque cercano">
+    </label>
+
+    <label>
+      Ruta de evacuación
+      <input id="ruta" type="text"
+             placeholder="Describe brevemente la ruta">
+    </label>
+
+    <button class="btn full" onclick="crearPlan()">
+      💾 Guardar plan familiar
+    </button>
+
+  </div>
+
+  <div id="planResultado" class="result"></div>
+
+  <button class="btn secondary" onclick="imprimirPlan()">
+    🖨️ Imprimir plan familiar
+  </button>
+
+</section>
+
+<section id="simulador" class="section">
+
+  <div class="section-title">
+    <span>🚨</span>
+
+    <div>
+      <h2>Simulador de emergencias</h2>
+      <p>Practica decisiones de prevención.</p>
+    </div>
+  </div>
+
+  <div class="card simulator">
+
+    <div class="sim-controls">
+
+      <button onclick="iniciarSimulador('terremoto')">
+        🌎 Terremoto
+      </button>
+
+      <button onclick="iniciarSimulador('incendio')">
+        🔥 Incendio
+      </button>
+
+      <button onclick="iniciarSimulador('inundacion')">
+        🌊 Inundación
+      </button>
+
+      <button onclick="iniciarSimulador('huaico')">
+        ⛰️ Huaico
+      </button>
+
+    </div>
+
+    <div id="simuladorBox">
+
+      <h3 id="simuladorTitulo">
+        Selecciona una situación
+      </h3>
+
+      <p id="simuladorTexto">
+        Practica diferentes decisiones y aprende con cada respuesta.
+      </p>
+
+      <div id="opcionesSimulador"></div>
+
+      <p id="simuladorResultado"></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="juego" class="section game-section">
+
+  <div class="section-title">
+    <span>🎮</span>
+
+    <div>
+      <h2>Misión MochilaSegura</h2>
+      <p>Supera 10 niveles, gana puntos y desbloquea títulos.</p>
+    </div>
+  </div>
+
+  <div class="level-grid" id="levelGrid"></div>
+
+  <div class="game-card">
+
+    <div class="game-top">
+
+      <div>
+        <span>NIVEL</span>
+        <strong id="nivelJuego">1</strong>
+      </div>
+
+      <div>
+        <span>⭐ PUNTOS</span>
+        <strong id="puntosJuego">0</strong>
+      </div>
+
+      <div>
+        <span>❤️ VIDAS</span>
+        <strong id="vidasJuego">❤️❤️❤️</strong>
+      </div>
+
+      <div>
+        <span>⏱️ TIEMPO</span>
+        <strong id="tiempoJuego">--</strong>
+      </div>
+
+    </div>
+
+    <div class="game-progress">
+      <div id="missionBar"></div>
+    </div>
+
+    <div class="game-content">
+
+      <span id="nivelEmoji" class="level-emoji">🎒</span>
+
+      <h3 id="tituloMision">
+        Nivel 1 — Preparación de mochila
+      </h3>
+
+      <p id="descripcionMision">
+        Responde correctamente para avanzar.
+      </p>
+
+      <div id="objetosJuego"></div>
+
+      <p id="mensajeJuego" class="game-message"></p>
+
+      <div class="game-actions">
+
+        <button id="btnIniciar"
+                class="btn"
+                onclick="iniciarJuego()">
+          ▶️ Iniciar nivel
+        </button>
+
+        <button id="btnReiniciar"
+                class="btn secondary"
+                onclick="reiniciarJuego()">
+          🔄 Reiniciar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="nivelCompletado"
+       class="level-complete hidden">
+  </div>
+
+</section>
+
+<section id="logros" class="section alt">
+
+  <div class="section-title">
+    <span>🏅</span>
+
+    <div>
+      <h2>Medallas y logros</h2>
+      <p>Descubre tus logros mientras avanzas.</p>
+    </div>
+  </div>
+
+  <div id="logrosContainer"
+       class="achievement-grid">
+  </div>
+
+</section>
+
+<section id="aprende" class="section">
+
+  <div class="section-title">
+    <span>📚</span>
+
+    <div>
+      <h2>Centro educativo</h2>
+      <p>Información breve para aprender a prevenir.</p>
+    </div>
+  </div>
+
+  <div class="learn-grid">
+
+    <article>
+      <span>🌎</span>
+      <h3>Terremotos</h3>
+      <p>
+        Mantén la calma, busca una zona segura y sigue el plan familiar.
+      </p>
+    </article>
+
+    <article>
+      <span>🔥</span>
+      <h3>Incendios</h3>
+      <p>
+        Alerta a las personas, evacúa por una ruta segura y sigue las indicaciones.
+      </p>
+    </article>
+
+    <article>
+      <span>🌊</span>
+      <h3>Inundaciones</h3>
+      <p>
+        Evita zonas inundadas y permanece atento a las indicaciones oficiales.
+      </p>
+    </article>
+
+    <article>
+      <span>⛰️</span>
+      <h3>Huaicos</h3>
+      <p>
+        Aléjate de quebradas y zonas de peligro y sigue las rutas de evacuación.
+      </p>
+    </article>
+
+    <article>
+      <span>🌧️</span>
+      <h3>Lluvias intensas</h3>
+      <p>
+        Prepárate con anticipación y evita lugares que puedan presentar riesgo.
+      </p>
+    </article>
+
+    <article>
+      <span>🎒</span>
+      <h3>Mochila de emergencia</h3>
+      <p>
+        Debe contener elementos útiles para las necesidades básicas de la familia.
+      </p>
+    </article>
+
+  </div>
+
+</section>
+
+<section class="section evaluation">
+
+  <div class="card final-card">
+
+    <h2>📊 Tu evaluación</h2>
+
+    <div class="evaluation-number"
+         id="evaluacionPorcentaje">
+      0%
+    </div>
+
+    <p id="evaluacionTexto">
+      Completa actividades para conocer tu progreso.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="section emergency">
+
+  <div class="card">
+
+    <h2>📞 Números de emergencia en Perú</h2>
+
+    <div class="emergency-grid">
+
+      <span>
+        🚔 Policía: <b>105</b>
+      </span>
+
+      <span>
+        🚒 Bomberos: <b>116</b>
+      </span>
+
+      <span>
+        🚑 SAMU: <b>106</b>
+      </span>
+
+    </div>
+
+    <p class="note">
+      En una emergencia real, busca ayuda de los servicios correspondientes
+      y sigue las indicaciones oficiales.
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <p>
+    🎒 MochilaSegura — Herramienta educativa de prevención y gestión de riesgos.
+  </p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
